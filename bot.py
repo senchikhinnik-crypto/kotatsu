@@ -5,7 +5,7 @@ import random
 
 # ====== ДАННЫЕ БОТА ======
 TOKEN = os.getenv("TOKEN")  # Токен в Render, НЕ в коде!
-ID_KANALA_PRIVETSTVIE = 1500808393655455754  # ID канала приветствия (ПРОВЕРЬ!)
+ID_KANALA_PRIVETSTVIE = 1500808393655455754  # ID канала приветствия
 
 # ====== НАСТРОЙКИ ======
 intents = discord.Intents.default()
@@ -19,6 +19,10 @@ bot = commands.Bot(command_prefix="!", intents=intents)
 async def on_member_join(member):
     channel = bot.get_channel(ID_KANALA_PRIVETSTVIE)
     if channel:
+        # 1. Отправляем чистый пинг (уведомление)
+        await channel.send(member.mention)
+        
+        # 2. Отправляем красивый embed с серой рамкой
         phrases = [
             "«Если боль не убьет тебя, она сделает тебя сильнее»",
             "«Восстань, мой верный воин»",
@@ -29,9 +33,9 @@ async def on_member_join(member):
         selected_phrase = random.choice(phrases)
         
         embed = discord.Embed(
-            title=f"⚔️ Врата открылись, {member.mention}!",
+            title=f"⚔️ Врата открылись, {member.name}!",
             description=selected_phrase,
-            color=0x2C2F33
+            color=0x2C2F33  # тёмно-серый цвет рамки
         )
         embed.set_image(url="https://iili.io/BQuojfe.png")  # Твоя картинка
         
