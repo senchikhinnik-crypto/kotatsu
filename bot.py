@@ -29,7 +29,7 @@ async def on_member_join(member):
         selected_phrase = random.choice(phrases)
         
         embed = discord.Embed(
-            title=f"⚔️ Врата открылись, {member.name}!",
+            title=f"⚔️ Врата открылись, {member.mention}!",
             description=selected_phrase,
             color=0x2C2F33
         )
